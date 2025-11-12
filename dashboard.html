@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySubs Control - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Colapsible -->
+        <nav class="sidebar" id="sidebar">
+            <button class="sidebar-toggle" id="sidebarToggle">‹</button>
+            <div class="sidebar-header">
+                <h1 class="logo">MySubs<span>Cont</span></h1>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="dashboard.html" class="active">
+                    <span class="icon dashboard"></span>
+                    <span class="nav-text">Dashboard</span>
+                </a></li>
+                <li><a href="subscriptions.html">
+                    <span class="icon subscriptions"></span>
+                    <span class="nav-text">Mis Suscripciones</span>
+                </a></li>
+                <li><a href="new-subscription.html">
+                    <span class="icon add"></span>
+                    <span class="nav-text">Agregar Suscripción</span>
+                </a></li>
+                <li><a href="notifications.html">
+                    <span class="icon notifications"></span>
+                    <span class="nav-text">Notificaciones</span>
+                </a></li>
+                <li><a href="settings.html">
+                    <span class="icon settings"></span>
+                    <span class="nav-text">Configuración</span>
+                </a></li>
+                <li><a href="index.html">
+                    <span class="icon logout"></span>
+                    <span class="nav-text">Cerrar Sesión</span>
+                </a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <div class="header">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>Hola, Juan! Bienvenido de vuelta</p>
+                </div>
+                <div class="user-menu">
+                    <span>15 Oct 2024</span>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">$245.00</div>
+                    <div class="stat-label">Total este mes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Suscripciones activas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Próximos vencimientos</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Próximos Vencimientos</h2>
+                    <a href="subscriptions.html" class="btn btn-secondary btn-sm">Ver Todas</a>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Servicio</th>
+                            <th>Fecha</th>
+                            <th>Monto</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Netflix</td>
+                            <td>15 Oct 2024</td>
+                            <td>$12.99</td>
+                            <td><button class="btn btn-secondary btn-sm">Pagar</button></td>
+                        </tr>
+                        <tr>
+                            <td>Spotify</td>
+                            <td>20 Oct 2024</td>
+                            <td>$9.99</td>
+                            <td><button class="btn btn-secondary btn-sm">Pagar</button></td>
+                        </tr>
+                        <tr>
+                            <td>Adobe Cloud</td>
+                            <td>25 Oct 2024</td>
+                            <td>$52.99</td>
+                            <td><button class="btn btn-secondary btn-sm">Pagar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="text-center mt-20">
+                <a href="new-subscription.html" class="btn btn-primary">
+                    <span class="icon add"></span>
+                    + AGREGAR SUSCRIPCIÓN
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Funcionalidad para el sidebar colapsible
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const mainContent = document.getElementById('mainContent');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+
+        // Toggle sidebar en desktop
+        sidebarToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+            
+            // Cambiar el ícono del botón
+            if (sidebar.classList.contains('collapsed')) {
+                sidebarToggle.innerHTML = '›';
+            } else {
+                sidebarToggle.innerHTML = '‹';
+            }
+        });
+
+        // Toggle sidebar en móviles
+        mobileMenuBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+        });
+
+        // Cerrar sidebar en móviles al hacer click fuera
+        document.addEventListener('click', function(event) {
+            if (window.innerWidth <= 768) {
+                const isClickInsideSidebar = sidebar.contains(event.target);
+                const isClickOnMobileBtn = mobileMenuBtn.contains(event.target);
+                
+                if (!isClickInsideSidebar && !isClickOnMobileBtn && sidebar.classList.contains('active')) {
+                    sidebar.classList.remove('active');
+                }
+            }
+        });
+
+        // Ajustar sidebar al cambiar tamaño de ventana
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

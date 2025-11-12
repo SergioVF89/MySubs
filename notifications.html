@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySubs Control - Notificaciones</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="sidebar" id="sidebar">
+            <button class="sidebar-toggle" id="sidebarToggle">‹</button>
+            <div class="sidebar-header">
+                <h1 class="logo">MySubs<span>Cont</span></h1>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="dashboard.html"><span class="icon dashboard"></span> <span class="nav-text">Dashboard</span></a></li>
+                <li><a href="subscriptions.html"><span class="icon subscriptions"></span> <span class="nav-text">Mis Suscripciones</span></a></li>
+                <li><a href="new-subscription.html"><span class="icon add"></span> <span class="nav-text">Agregar Suscripción</span></a></li>
+                <li><a href="notifications.html" class="active"><span class="icon notifications"></span> <span class="nav-text">Notificaciones</span></a></li>
+                <li><a href="settings.html"><span class="icon settings"></span> <span class="nav-text">Configuración</span></a></li>
+                <li><a href="index.html"><span class="icon logout"></span> <span class="nav-text">Cerrar Sesión</span></a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content" id="mainContent">
+            <div class="header">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+                <div>
+                    <h1>Notificaciones</h1>
+                    <p>Mantente al día con tus suscripciones</p>
+                </div>
+            </div>
+
+            <div class="notification warning">
+                <div class="notification-header">
+                    <div class="notification-title">Recordatorio</div>
+                    <div class="notification-type">URGENTE</div>
+                </div>
+                <p>Netflix se renovará en 3 días</p>
+                <p><strong>Fecha:</strong> 15 Oct 2024</p>
+                <p><strong>Monto:</strong> $12.99</p>
+                <div class="notification-actions">
+                    <button class="btn btn-secondary btn-sm">Recordarme después</button>
+                    <button class="btn btn-danger btn-sm">Cancelar suscripción</button>
+                </div>
+            </div>
+
+            <div class="notification success">
+                <div class="notification-header">
+                    <div class="notification-title">Resumen Mensual</div>
+                    <div class="notification-type">INFORME</div>
+                </div>
+                <p>Tu gasto en Octubre: $245.00</p>
+                <p>5 suscripciones activas</p>
+                <div class="notification-actions">
+                    <button class="btn btn-primary btn-sm">Ver detalles</button>
+                </div>
+            </div>
+
+            <div class="notification">
+                <div class="notification-header">
+                    <div class="notification-title">Alerta</div>
+                    <div class="notification-type">ACTUALIZACIÓN</div>
+                </div>
+                <p>Aumento de precio detectado:</p>
+                <p><strong>Spotify - De $9.99 a $10.99</strong></p>
+                <div class="notification-actions">
+                    <button class="btn btn-primary btn-sm">Actualizar precio</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const mainContent = document.getElementById('mainContent');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+
+        sidebarToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+            
+            if (sidebar.classList.contains('collapsed')) {
+                sidebarToggle.innerHTML = '›';
+            } else {
+                sidebarToggle.innerHTML = '‹';
+            }
+        });
+
+        mobileMenuBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+        });
+
+        document.addEventListener('click', function(event) {
+            if (window.innerWidth <= 768) {
+                const isClickInsideSidebar = sidebar.contains(event.target);
+                const isClickOnMobileBtn = mobileMenuBtn.contains(event.target);
+                
+                if (!isClickInsideSidebar && !isClickOnMobileBtn && sidebar.classList.contains('active')) {
+                    sidebar.classList.remove('active');
+                }
+            }
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

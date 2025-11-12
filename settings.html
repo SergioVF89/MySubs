@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySubs Control - Configuración</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="sidebar" id="sidebar">
+            <button class="sidebar-toggle" id="sidebarToggle">‹</button>
+            <div class="sidebar-header">
+                <h1 class="logo">MySubs<span>Cont</span></h1>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="dashboard.html"><span class="icon dashboard"></span> <span class="nav-text">Dashboard</span></a></li>
+                <li><a href="subscriptions.html"><span class="icon subscriptions"></span> <span class="nav-text">Mis Suscripciones</span></a></li>
+                <li><a href="new-subscription.html"><span class="icon add"></span> <span class="nav-text">Agregar Suscripción</span></a></li>
+                <li><a href="notifications.html"><span class="icon notifications"></span> <span class="nav-text">Notificaciones</span></a></li>
+                <li><a href="settings.html" class="active"><span class="icon settings"></span> <span class="nav-text">Configuración</span></a></li>
+                <li><a href="index.html"><span class="icon logout"></span> <span class="nav-text">Cerrar Sesión</span></a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content" id="mainContent">
+            <div class="header">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+                <div>
+                    <h1>Configuración</h1>
+                    <p>Personaliza tu experiencia en MySubs Control</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="login-form">
+                    <div class="form-group">
+                        <label class="form-label">Idioma</label>
+                        <select class="form-control">
+                            <option>Español</option>
+                            <option>English</option>
+                            <option>Português</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Notificaciones</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked> Recordatorios de pago
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked> Resúmenes mensuales
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox"> Alertas de precio
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Datos personales</label>
+                        <div class="form-row">
+                            <input type="text" class="form-control" placeholder="Nombre" value="Juan Pérez">
+                            <input type="email" class="form-control" placeholder="Email" value="juan@ejemplo.com">
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-between align-center mt-20">
+                        <button class="btn btn-primary">Guardar Cambios</button>
+                        <a href="index.html" class="btn btn-danger">Cerrar Sesión</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const mainContent = document.getElementById('mainContent');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+
+        sidebarToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+            
+            if (sidebar.classList.contains('collapsed')) {
+                sidebarToggle.innerHTML = '›';
+            } else {
+                sidebarToggle.innerHTML = '‹';
+            }
+        });
+
+        mobileMenuBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+        });
+
+        document.addEventListener('click', function(event) {
+            if (window.innerWidth <= 768) {
+                const isClickInsideSidebar = sidebar.contains(event.target);
+                const isClickOnMobileBtn = mobileMenuBtn.contains(event.target);
+                
+                if (!isClickInsideSidebar && !isClickOnMobileBtn && sidebar.classList.contains('active')) {
+                    sidebar.classList.remove('active');
+                }
+            }
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
